@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "env": {
+            "value": "prod"
+        },
+        "repositoryToken": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/20d65a45-3a4f-413d-9f05-03131b6addbb/resourceGroups/crypto/providers/Microsoft.KeyVault/vaults/crypto-dev"
+                },
+                "secretName": "githubToken"
+            }
+        }
+    }
+}
