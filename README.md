@@ -1,2 +1,2 @@
-# Web3 Learning
-For learning web 3 technologies
+# Crypto Learning
+For learning crypto things
