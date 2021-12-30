@@ -1,7 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { getChallenge, getJwt } from './sdk';
 import {  ethers } from 'ethers';
+
 
 declare global {
   interface Window {
@@ -9,15 +11,23 @@ declare global {
   }
 }
 
-const address = 'everts.eth';
+
+async function login() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  const signer = provider.getSigner();
+  const address = await signer.getAddress();
+  const challange = await getChallenge(address);
+  const signedChallenge = await signer.signMessage(challange);
+  const jwt = await getJwt(address, signedChallenge);
+  alert(`challenge success! your proved ownership of: ${jwt}`);
+}
 
 function App() {
   if ('ethereum' in window) {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // const signer = provider.getSigner()
-    provider.getBalance(address).then(balance => alert(`${address} contains ${ethers.utils.formatEther(balance)} ETH`));
+    login()
   } else {
-    alert('no bueno')
+    alert('please use a web3 compatible browser')
   }
 
   return (

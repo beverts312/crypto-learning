@@ -1,0 +1,5 @@
+azure-cosmos==4.2.0
+azure-functions==1.8.0
+azure-identity==1.7.0
+azure-mgmt-cosmosdb==6.4.0
+web3==5.25.0
