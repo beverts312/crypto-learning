@@ -1,8 +1,8 @@
-import logging
-
-from azure.functions import HttpRequest, HttpResponse
+from ..common.user import User
 from ..common.challenge import UserChallenge
+from ..common.jwt_helper import get_jwt
 from ..common.req_help import get_param
+from azure.functions import HttpRequest, HttpResponse
 from web3 import Web3
 from eth_account.messages import encode_defunct
 
@@ -17,12 +17,10 @@ def main(req: HttpRequest) -> HttpResponse:
         return HttpResponse("Must provide signed challange", status_code=400)
     else:
         stored_challenge = UserChallenge.get_challenge(addr).get("challenge")
-        logging.info(f"addr: {addr}")
-        logging.info(f"signed challenge: {challenge}")
-        logging.info(f"stored challenge: {stored_challenge}")
         w3 = Web3()
         account = w3.eth.account.recover_message(
             encode_defunct(text=stored_challenge),
             signature=challenge,
         )
-        return account
+        user = User.get_user(account)
+        return HttpResponse(f"account: {account} jwt: {get_jwt(user)}")

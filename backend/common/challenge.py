@@ -4,6 +4,7 @@ from azure.cosmos import (
     CosmosClient,
     PartitionKey,
 )
+from common.user import User
 from common.db_helper import ACCOUNT_URI, get_key
 from uuid import uuid4
 
@@ -14,6 +15,7 @@ class UserChallenge:
     net: str
 
     def create_challenge(self) -> str:
+        User.creat_if_not_exist(self.addr, self.net)
         client = UserChallenge.get_challenge_client()
         challenge = str(uuid4())
         client.upsert_item(

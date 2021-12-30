@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import logging
 from azure.cosmos import (
     ContainerProxy,
     CosmosClient,
@@ -28,4 +29,17 @@ class User:
     @staticmethod
     def get_user(addr, net="eth"):
         client = User.get_users_client()
-        return client.read_item(item=addr, partition_key=net)
+        try:
+            cm_user = client.read_item(item=addr, partition_key=net)
+            logging.info(cm_user)
+            return User(
+                cm_user.get("id"), cm_user.get("id"), cm_user.get("net")
+            )
+        except:
+            return None
+
+    @staticmethod
+    def creat_if_not_exist(addr, net="eth"):
+        user = User.get_user(addr, net)
+        if not user:
+            User(addr, addr, net).save()
