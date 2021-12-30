@@ -1,7 +1,9 @@
 import logging
 
 from azure.functions import HttpRequest, HttpResponse
+from ..common.user import User
 from ..common.challenge import UserChallenge
+from ..common.jwt_helper import get_jwt
 from ..common.req_help import get_param
 from web3 import Web3
 from eth_account.messages import encode_defunct
@@ -25,4 +27,5 @@ def main(req: HttpRequest) -> HttpResponse:
             encode_defunct(text=stored_challenge),
             signature=challenge,
         )
-        return account
+        user = User.get_user(account)
+        return HttpResponse(f"account: {account} jwt: {get_jwt(user)}")

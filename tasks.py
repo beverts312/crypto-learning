@@ -25,3 +25,10 @@ def lint(c):
 def build_diagrams(c):
     with c.cd("arch"):
         return c.run("python infra.py")
+
+
+@task(aliases=["s"])
+def setup_extras(c):
+    c.run("brew install graphviz")
+    with c.cd("ui"):
+        return c.run("npm install")
