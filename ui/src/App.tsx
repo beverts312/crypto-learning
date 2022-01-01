@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { getChallenge, getJwt } from './sdk';
 import {  ethers } from 'ethers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 declare global {
@@ -33,11 +33,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Connect a wallet to get started!
-        </p>
+        header
       </header>
+      <FontAwesomeIcon icon="coffee" />
     </div>
   );
 }
