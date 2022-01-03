@@ -1,4 +1,4 @@
-@startuml
+@startuml Login
 actor User as user
 participant crypto.baileyeverts.com as site
 participant Service as api

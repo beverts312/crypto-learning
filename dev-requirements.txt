@@ -3,3 +3,4 @@ pycodestyle==2.8.0
 black==21.12b0
 invoke==1.6.0
 diagrams==0.20.0
+plantuml==0.3.0

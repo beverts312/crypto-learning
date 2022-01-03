@@ -1,5 +1,5 @@
 from invoke import task
-
+from plantuml import PlantUML
 
 def black(c, check):
     cmd = f"black . --line-length=79 {'--check' if check is True else ''}"
@@ -24,6 +24,7 @@ def lint(c):
 @task(aliases=["d"])
 def build_diagrams(c):
     with c.cd("arch"):
+        c.run("python -m plantuml login.puml")
         return c.run("python infra.py")
 
 
