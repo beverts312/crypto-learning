@@ -1,0 +1,25 @@
+@startuml
+actor User as user
+participant crypto.baileyeverts.com as site
+participant Service as api
+database UsersDB as db
+
+user -> site : visit site
+site -> user : prompt connect wallet
+user -> site : connect wallet
+site -> api : get challenge
+api -> api : generate challenge
+api -> db : store challenge
+api -> site : send challenge
+site -> user : prompt to sign challenge
+user -> site : sign challenge
+site -> api : send signed challenge
+api -> db : get challenge
+api -> api : validate signed challenge against challenge
+
+alt#Gold #LightBlue valid signature
+  api -> site : send jwt
+else #Pink signature doesnt match
+  api -> site : unauthenticated
+end
+@enduml
