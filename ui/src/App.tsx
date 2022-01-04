@@ -20,7 +20,7 @@ async function login() {
   const challange = await getChallenge(address);
   const signedChallenge = await signer.signMessage(challange);
   const jwt = await getJwt(address, signedChallenge);
-  alert(`challenge success! your proved ownership of: ${jwt}`);
+  alert(`challenge success! you proved ownershiped of ${address}, your jwt is: ${jwt}`);
 }
 
 function App() {

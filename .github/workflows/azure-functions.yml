@@ -3,7 +3,7 @@ name: Azure Functions Pipeline
 on:
   push:
     branches:
-      - feat/jwt
+      - main
     paths:
       - backend/**
   pull_request:

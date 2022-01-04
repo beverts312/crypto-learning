@@ -22,5 +22,8 @@ def main(req: HttpRequest) -> HttpResponse:
             encode_defunct(text=stored_challenge),
             signature=challenge,
         )
-        user = User.get_user(account)
-        return HttpResponse(f"account: {account} jwt: {get_jwt(user)}")
+        if account == addr:
+            user = User.get_user(account)
+            return HttpResponse(get_jwt(user))
+        else:
+            return HttpResponse(status_code="401")
