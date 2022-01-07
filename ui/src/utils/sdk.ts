@@ -19,3 +19,20 @@ export async function getJwt(addr: string, signedChallenge: string): Promise<str
     }
     return await res.text();
 }
+
+export async function updateUser(addr: string, name: string, jwt: string): Promise<void> {
+    console.log('ehh');
+    const res = await fetch(getUrl('profile'), { 
+        method: 'POST', 
+        body: JSON.stringify({
+            addr: addr,
+            name: name
+        }),
+        headers: {
+            'special-auth': `Bearer ${jwt}`
+        }
+    });
+    if (res.status > 299) {
+        alert(res.text);
+    }
+}
