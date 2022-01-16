@@ -5,7 +5,7 @@ export async function getNfts(addr: string): Promise<NftAsset[]> {
     if (req.status > 299) {
         throw Error(await req.text());
     }
-    const assets = <any[]>(await req.json())['assets'];
+    const assets: any[] = (await req.json())['assets'];
     console.log(assets[0]);
     return assets.map(value => {
         return new NftAsset(
