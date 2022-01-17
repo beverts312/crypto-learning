@@ -6,6 +6,8 @@ description: ENS vs UDS
 
 Ethereum Name Service (ENS) and Unstoppable Domain Service (UNS) are 2 different services which surface information from domain records which are stored on the blockchain. Primarily both services make it easier to route payments to addresses but each service has additional capabilities.
 
+Checkout my tool for resolving ENS/UNS domains [here](https://crypto.baileyeverts.com/domain).
+
 ||ENS|UNS|
 |-|-|-|
 |Blockchain|Ethereum|Polygon|
